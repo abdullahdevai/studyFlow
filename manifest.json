@@ -3,12 +3,12 @@
   "name": "SubjectFlow — Subject & Topic Tracker",
   "short_name": "SubjectFlow",
   "description": "Track subjects, topics, status, and study progress.",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "orientation": "any",
+  "orientation": "portrait",
   "background_color": "#f5f7fb",
-  "theme_color": "#4f46e5",
+  "theme_color": "#f5f7fb",
   "categories": [
     "education",
     "productivity"
@@ -32,5 +32,8 @@
       "type": "image/png",
       "purpose": "maskable"
     }
+  ],
+  "display_override": [
+    "standalone"
   ]
 }

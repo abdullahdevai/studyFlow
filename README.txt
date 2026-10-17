@@ -19,4 +19,9 @@ Opening index.html directly as file:// will not enable service-worker/PWA instal
 
 Data:
 Subject data is stored in this browser's Local Storage. It is not synced across devices.
-Use Export to make a backup. In the app, right-click Export to import a JSON backup.
+Use the ⋯ menu to export a JSON backup or import one.
+
+Install on a phone:
+- Android (Chrome): open the HTTPS site, tap "Install" on the banner or in the ⋯ menu.
+- iPhone/iPad (Safari): tap Share, then "Add to Home Screen".
+After a new deploy, the installed app picks up the new version on its next launch.
