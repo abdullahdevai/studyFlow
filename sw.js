@@ -1,10 +1,11 @@
-const CACHE_NAME = 'subjectflow-cache-v2';
+const CACHE_NAME = 'subjectflow-cache-v3';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.json',
   './icons/icon-192.png',
-  './icons/icon-512.png'
+  './icons/icon-512.png',
+  './icons/apple-touch-icon.png'
 ];
 
 self.addEventListener('install', event => {

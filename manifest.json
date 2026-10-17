@@ -2,13 +2,13 @@
   "id": "./",
   "name": "SubjectFlow — Subject & Topic Tracker",
   "short_name": "SubjectFlow",
-  "description": "Track subjects, topics, status, and study progress.",
+  "description": "Track subjects, topics, exams, and study progress offline.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f5f7fb",
-  "theme_color": "#f5f7fb",
+  "background_color": "#fafafa",
+  "theme_color": "#fafafa",
   "categories": [
     "education",
     "productivity"
@@ -27,7 +27,7 @@
       "purpose": "any"
     },
     {
-      "src": "icons/icon-512.png",
+      "src": "icons/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -35,5 +35,28 @@
   ],
   "display_override": [
     "standalone"
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/mobile-home.png",
+      "sizes": "780x1688",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Subjects and daily progress"
+    },
+    {
+      "src": "screenshots/mobile-subject.png",
+      "sizes": "780x1688",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Topics with progress"
+    },
+    {
+      "src": "screenshots/desktop.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "SubjectFlow on desktop"
+    }
   ]
 }

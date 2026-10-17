@@ -3,199 +3,341 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f5f7fb">
+<meta name="theme-color" content="#fafafa">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="SubjectFlow">
-<meta name="description" content="Track subjects, topics, status, and study progress offline.">
+<meta name="description" content="Track subjects, topics, exams, and study progress offline.">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icons/icon-192.png" type="image/png">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-<title>SubjectFlow — Study Tracker</title>
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<title>SubjectFlow</title>
 <style>
-:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#738096;--line:#e6eaf1;--primary:#4f46e5;--primary2:#4338ca;--green:#16845b;--amber:#b7791f;--red:#c24141;--shadow:0 8px 28px rgba(24,39,75,.06)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.app{max-width:1180px;margin:auto;padding:26px 20px 50px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:14px;background:var(--primary);color:#fff;display:grid;place-items:center;font-size:23px;box-shadow:0 7px 16px #4f46e533}.brand h1{font-size:20px;letter-spacing:-.5px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}.actions{display:flex;gap:9px;flex-wrap:wrap}.btn{padding:10px 14px;border-radius:10px;font-weight:650;font-size:13px;display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:.15s}.btn-primary{background:var(--primary);color:white}.btn-primary:hover{background:var(--primary2)}.btn-light{background:#fff;border:1px solid var(--line);color:var(--text)}.btn-danger{background:#fff1f1;color:var(--red)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px;font-weight:650}.stat-icon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:#eeedff;color:var(--primary);font-size:16px}.stat strong{display:block;font-size:27px;letter-spacing:-1px;margin:8px 0 2px}.stat small{color:var(--muted);font-size:12px}.layout{display:grid;grid-template-columns:310px minmax(0,1fr);gap:18px;align-items:start}.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:18px 18px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}.panel-head h2{font-size:15px;margin:0}.subtle{font-size:12px;color:var(--muted)}.subject-list{padding:0 10px 12px}.subject-item{display:flex;align-items:center;gap:10px;padding:12px;border-radius:12px;cursor:pointer;margin:3px 0;border:1px solid transparent}.subject-item:hover{background:#f8f9ff}.subject-item.active{background:#f0efff;border-color:#e0ddff}.subject-dot{width:10px;height:10px;border-radius:50%;background:var(--primary);flex-shrink:0}.subject-meta{min-width:0;flex:1}.subject-name{font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.subject-count{font-size:11px;color:var(--muted);margin-top:2px}.mini-progress{height:5px;background:#e9edf5;border-radius:8px;overflow:hidden;margin-top:7px}.mini-progress span,.bar span{display:block;height:100%;background:var(--primary);border-radius:8px}.subject-percent{font-size:11px;color:var(--muted)}.empty-side{padding:22px 16px;text-align:center;color:var(--muted);font-size:13px}.content-head{padding:20px 22px;border-bottom:1px solid var(--line)}.content-title-row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.content-title{font-size:22px;font-weight:780;letter-spacing:-.7px;margin:0;overflow-wrap:anywhere}.content-desc{color:var(--muted);font-size:13px;margin:5px 0 0}.subject-progress{margin-top:17px}.progress-label{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted);margin-bottom:7px}.progress-label strong{color:var(--text)}.bar{height:8px;background:#edf0f6;border-radius:10px;overflow:hidden}.topic-toolbar{padding:15px 20px;display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid var(--line)}.search{width:100%;max-width:245px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;outline:none;background:#fbfcfe;font-size:13px}.search:focus,input:focus,textarea:focus,select:focus{border-color:#a5a0ff;box-shadow:0 0 0 3px #4f46e515;outline:none}.topic-list{padding:8px 14px 16px}.topic{padding:15px 8px;border-bottom:1px solid #eef0f5}.topic:last-child{border-bottom:0}.topic-main{display:flex;align-items:flex-start;gap:12px}.check{width:20px;height:20px;margin-top:2px;accent-color:var(--primary);flex-shrink:0}.topic-body{min-width:0;flex:1}.topic-name{font-weight:700;font-size:14px;overflow-wrap:anywhere}.topic-note{font-size:12px;color:var(--muted);margin-top:3px;overflow-wrap:anywhere}.topic-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}.status{border-radius:20px;padding:4px 8px;font-size:10px;font-weight:750;white-space:nowrap}.status-not{background:#f0f2f6;color:#657187}.status-progress{background:#fff3d9;color:#9a6500}.status-done{background:#e3f7ee;color:#13734d}.icon-btn{background:transparent;color:#7b8799;padding:5px 7px;border-radius:7px;font-size:15px}.icon-btn:hover{background:#f0f2f8;color:var(--text)}.topic-progress-row{margin:12px 0 0 32px;display:flex;align-items:center;gap:10px}.topic-progress-row input{flex:1;accent-color:var(--primary);height:4px}.topic-progress-row span{font-size:11px;color:var(--muted);width:34px;text-align:right}.empty-main{padding:55px 20px;text-align:center}.empty-illustration{width:56px;height:56px;border-radius:18px;background:#efefff;color:var(--primary);display:grid;place-items:center;margin:0 auto 13px;font-size:25px}.empty-main h3{margin:0 0 5px;font-size:16px}.empty-main p{margin:0 auto 17px;color:var(--muted);font-size:13px;max-width:300px}.hidden{display:none!important}.footer{color:#929bad;text-align:center;font-size:11px;margin-top:22px}.modal-backdrop{position:fixed;inset:0;background:#11182775;display:grid;place-items:center;padding:18px;z-index:5}.modal{background:white;width:min(100%,440px);border-radius:18px;padding:22px;box-shadow:0 25px 70px #0003;max-height:90vh;overflow:auto}.modal h3{margin:0 0 18px;font-size:18px}.field{display:block;margin:13px 0}.field span{display:block;font-size:12px;font-weight:700;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:13px}.field textarea{resize:vertical;min-height:75px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}.notice{font-size:11px;color:var(--muted);margin-top:12px}
-html{-webkit-tap-highlight-color:transparent}button{-webkit-user-select:none;user-select:none;touch-action:manipulation}.back-btn,.fab{display:none}
-.sheet{width:min(100%,360px)}.sheet h3{margin-bottom:8px}.sheet-item{display:flex;width:100%;align-items:center;gap:12px;padding:14px 12px;border-radius:12px;background:transparent;color:var(--text);font-weight:650;text-align:left}.sheet-item:hover{background:#f5f6fb}.sheet-item b{width:22px;text-align:center;color:var(--primary);font-size:17px}.sheet-cancel{width:100%;margin-top:10px}
-.install-banner{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:18px;box-shadow:var(--shadow)}.install-banner .logo{width:38px;height:38px;font-size:19px;border-radius:12px;flex-shrink:0}.install-text{flex:1;min-width:0}.install-text strong{display:block;font-size:13px}.install-text span{display:block;font-size:12px;color:var(--muted)}
-.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:#172033;color:#fff;padding:10px 16px;border-radius:12px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:.2s;z-index:10;max-width:calc(100% - 32px)}.toast.show{opacity:1;transform:translate(-50%,0)}
+:root{--bg:#fafafa;--surface:#fff;--text:#18181b;--muted:#62626d;--line:#ececef;--hover:#f2f2f4;--track:#e9e9ec;--accent:#4f46e5;--accent-soft:#eef0ff;--on-accent:#fff;--ok:#16a34a;--danger:#dc2626;--toast-action:#a5b4fc;color-scheme:light}
+*{box-sizing:border-box}html{-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}button{cursor:pointer;border:0;background:none;padding:0;-webkit-user-select:none;user-select:none;touch-action:manipulation}
+[hidden]{display:none!important}
+.app{max-width:1040px;margin:0 auto;padding:0 24px 64px}
+.bar{position:sticky;top:0;z-index:4;display:flex;align-items:center;gap:8px;min-height:64px;padding-top:env(safe-area-inset-top);background:var(--bg)}
+.brand{flex:1;margin:0;font-size:17px;font-weight:650;letter-spacing:-.2px}
+.back{display:none;flex:1;align-items:center;gap:2px;color:var(--accent);font-weight:600;font-size:16px}.back b{font-size:26px;font-weight:400;line-height:1;margin-top:-3px}
+.icon{width:40px;height:40px;display:grid;place-items:center;border-radius:10px;color:var(--muted);font-size:20px;line-height:1}.icon:hover{background:var(--hover);color:var(--text)}
+.banner{display:flex;align-items:center;gap:6px;padding:6px 4px 6px 14px;margin-bottom:16px;border:1px solid var(--line);border-radius:12px;font-size:13px;color:var(--muted)}.banner span{flex:1}
+.link{color:var(--accent);font-weight:600;font-size:13px;padding:6px 8px}
+.layout{display:grid;grid-template-columns:340px minmax(0,1fr);gap:48px;align-items:start;padding-top:8px}
+.side{position:sticky;top:72px}
+.hello{margin-bottom:16px}.hello h2{margin:0;font-size:22px;font-weight:650;letter-spacing:-.4px}.hello p{margin:2px 0 0;color:var(--muted);font-size:14px}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}.summary>*{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px}
+.summary strong{display:block;font-size:20px;font-weight:650;letter-spacing:-.4px;font-variant-numeric:tabular-nums}.summary span{display:block;font-size:12px;color:var(--muted);line-height:1.3}
+#goalBtn:hover{border-color:var(--accent)}#goalBtn span::after{content:" ✎";color:var(--accent)}
+.search{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);outline:none;margin-bottom:20px}
+.search:focus,.field input:focus,.field textarea:focus{border-color:var(--accent)}
+.list-head{display:flex;align-items:center;justify-content:space-between;min-height:40px}
+.list-head h2{margin:0;font-size:15px;font-weight:650}.list-head h2 span{color:var(--muted);font-weight:500}
+.add{display:inline-flex;align-items:center;gap:4px;padding:7px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:14px}.add:hover{background:#e2e5ff}
+.list{list-style:none;margin:0;padding:0}
+.subject{display:flex;align-items:center;gap:12px;padding:12px;margin-bottom:8px;border:1px solid var(--line);border-radius:14px;cursor:pointer;background:var(--surface)}.subject:hover{border-color:#d6d6dc}.subject.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}.mini{height:4px;border-radius:4px;background:var(--track);margin-top:8px;overflow:hidden}.mini span{display:block;height:100%;border-radius:4px}.meta{flex:1;min-width:0}
+.name{font-weight:550;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sub{font-size:12px;color:var(--muted)}.soon{color:var(--danger)}
+.pct{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.grip{width:24px;height:36px;display:grid;place-items:center;color:var(--muted);opacity:.5;cursor:grab;touch-action:none;flex-shrink:0}.grip::before{content:"";width:8px;height:14px;background:radial-gradient(circle,currentColor 1.3px,transparent 1.6px) 0 0/4px 5px}
+.dragging{position:relative;z-index:2;box-shadow:0 8px 24px rgba(0,0,0,.14);border-radius:10px}.dragging .grip{cursor:grabbing}
+.empty{color:var(--muted);font-size:14px;padding:12px 0;list-style:none}
+.start{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;margin-top:4px}.start h3{margin:0 0 4px;font-size:17px;font-weight:650}.start p{margin:0 0 12px;color:var(--muted);font-size:14px}
+.start ol{margin:0 0 18px;padding:0;list-style:none;counter-reset:s}.start li{counter-increment:s;display:flex;gap:10px;align-items:baseline;padding:5px 0;font-size:14px}.start li::before{content:counter(s);flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:700;display:grid;place-items:center;transform:translateY(-1px)}
+.detail-head{display:flex;gap:12px;align-items:flex-start}.detail-head>div{flex:1;min-width:0}
+.detail-head h2{margin:0;font-size:28px;font-weight:650;letter-spacing:-.6px;line-height:1.2;overflow-wrap:anywhere}
+.detail-head p{margin:6px 0 0;color:var(--muted);font-size:14px;overflow-wrap:anywhere}
+.track{height:4px;border-radius:4px;background:var(--track);overflow:hidden;margin:20px 0 28px}.track span{display:block;height:100%;border-radius:4px;transition:width .3s}
+.topic{position:relative;border-bottom:1px solid var(--line);overflow:hidden;touch-action:pan-y}
+.topic::before,.topic::after{position:absolute;inset:0;display:flex;align-items:center;padding:0 20px;font-size:13px;font-weight:600;color:#fff;opacity:0;transition:opacity .15s}
+.topic::before{content:"Done";background:var(--ok)}.topic::after{content:"Delete";justify-content:flex-end;background:var(--danger)}
+.topic[data-dir=right]::before,.topic[data-dir=left]::after{opacity:.5}.topic[data-dir=right][data-armed]::before,.topic[data-dir=left][data-armed]::after{opacity:1}
+.row{position:relative;z-index:1;display:flex;gap:12px;align-items:flex-start;padding:14px 0;background:var(--bg);transition:transform .2s}.swiping .row{transition:none}
+.check{width:22px;height:22px;margin-top:1px;border-radius:50%;border:1.5px solid var(--muted);flex-shrink:0;display:grid;place-items:center;color:transparent;font-size:12px;font-weight:700;transition:.15s}
+.check.done{background:var(--ok);border-color:var(--ok);color:#fff}
+.topic-body{flex:1;min-width:0;cursor:pointer}.topic-name{font-weight:500;overflow-wrap:anywhere}.is-done .topic-name{color:var(--muted);text-decoration:line-through}
+.topic-note{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.segs{display:flex;align-items:center;gap:4px;margin-top:6px}.segs button{position:relative;width:36px;height:22px}
+.segs button::after{content:"";position:absolute;left:0;right:0;top:9px;height:4px;border-radius:4px;background:var(--track)}.segs button.on::after{background:var(--c)}
+.segs span{font-size:12px;color:var(--muted);margin-left:8px}.is-done .segs span{color:var(--ok);font-weight:600}
+.hint{font-size:13px;color:var(--muted);text-align:center;margin-top:20px}.hint-touch{display:none}
+@media(hover:none) and (pointer:coarse){.hint-touch{display:block}.hint-mouse{display:none}}
+.btn{padding:11px 18px;border-radius:10px;font-weight:600;font-size:14px}.btn-primary{background:var(--accent);color:var(--on-accent)}
+.btn-ghost{border:1px solid var(--line)}.btn-soft{background:var(--accent-soft);color:var(--accent);padding:8px 14px;font-size:13px}.btn-danger{color:var(--danger);padding-left:0;padding-right:0}
+.welcome{padding:96px 0;text-align:center;color:var(--muted)}.welcome h3{margin:0 0 6px;color:var(--text);font-size:18px;font-weight:600}.welcome p{margin:0 0 20px}
+.backdrop{position:fixed;inset:0;z-index:8;background:rgba(0,0,0,.4);display:grid;place-items:center;padding:20px}
+.sheet{width:min(100%,420px);background:var(--surface);border-radius:16px;padding:20px;max-height:90vh;overflow:auto}
+.sheet h3{margin:0 0 8px;font-size:17px;font-weight:650}
+.field{display:block;margin:14px 0}.field>span{display:block;font-size:13px;font-weight:600;margin-bottom:6px}.field small{display:block;font-size:12px;color:var(--muted);margin-top:4px}
+.field input:not([type=radio]),.field textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);outline:none}
+.field textarea{min-height:72px;resize:vertical}
+.swatches{display:flex;gap:12px;flex-wrap:wrap;padding:2px}
+.swatches input{-webkit-appearance:none;appearance:none;width:28px;height:28px;margin:0;border-radius:50%;background:var(--sw);cursor:pointer;outline-offset:3px}.swatches input:checked{outline:2px solid var(--text)}
+.sheet-actions{display:flex;align-items:center;gap:8px;margin-top:20px}.sheet-actions .right{display:flex;gap:8px;margin-left:auto}
+.menu-item{display:flex;justify-content:space-between;align-items:center;width:100%;padding:14px 2px;border-bottom:1px solid var(--line);text-align:left;font-weight:500}.menu-item:last-child{border-bottom:0}.menu-item small{color:var(--muted);font-size:14px;font-weight:400}.menu-item em{display:block;font-style:normal;font-size:13px;color:var(--muted);font-weight:400}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,16px);display:flex;align-items:center;gap:16px;background:var(--text);color:var(--bg);padding:11px 16px;border-radius:12px;font-size:14px;white-space:nowrap;opacity:0;pointer-events:none;transition:.2s;z-index:10}
+.toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}.toast button{color:var(--toast-action);font-weight:650}
+.fab{display:none}
 @media(display-mode:standalone){body{overscroll-behavior-y:none}}
-@keyframes sheetUp{from{transform:translateY(100%)}to{transform:none}}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}
 @media(max-width:760px){
-.app{padding:0 14px calc(100px + env(safe-area-inset-bottom))}
-.topbar{position:sticky;top:0;z-index:4;margin:0 -14px 14px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;min-height:60px;background:rgba(245,247,251,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
-.brand .logo{width:36px;height:36px;font-size:18px;border-radius:11px}.brand h1{font-size:18px}.brand p{display:none}
-.actions .btn{padding:9px 12px;font-size:13px}.desktop-only{display:none!important}
-.back-btn{align-items:center;gap:2px;background:none;color:var(--primary);font-weight:700;font-size:16px;padding:8px 8px 8px 0}.back-btn b{font-size:28px;line-height:1;font-weight:400;margin-top:-3px}
-.fab{display:grid;place-items:center;position:fixed;right:calc(18px + env(safe-area-inset-right));bottom:calc(20px + env(safe-area-inset-bottom));width:58px;height:58px;border-radius:18px;background:var(--primary);color:#fff;font-size:28px;box-shadow:0 10px 24px #4f46e555;z-index:4;transition:transform .12s}.fab:active{transform:scale(.92)}
-.stats{grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px}.stat{padding:13px 14px}.stat strong{font-size:22px;margin:4px 0 0}.stat small{display:none}
-.layout{grid-template-columns:1fr}
-body.view-home .content-panel,#sideAddBtn{display:none}body.view-home .subject-item.active{background:transparent;border-color:transparent}
-body.view-subject .side-panel,body.view-subject .stats,body.view-subject .install-banner,body.view-subject .footer,body.view-subject .brand{display:none!important}
-body.view-subject .back-btn{display:inline-flex}
-.subject-list{padding:0 8px 8px}.subject-item{padding:14px 12px}.subject-name{font-size:15px}.subject-count{font-size:12px}
-.content-head{padding:18px}.content-title{font-size:22px}
-.topic-toolbar{flex-wrap:wrap;padding:12px 14px}.topic-toolbar .actions{width:100%}.search{max-width:none;font-size:16px;padding:11px 12px}#addTopicBtn{display:none}
-.topic-list{padding:4px 12px 12px}.topic{padding:14px 2px}.topic-main{gap:10px}.check{width:24px;height:24px;margin-top:0}
-.icon-btn{min-width:40px;min-height:40px;font-size:18px}.topic-right{gap:2px}
-.topic-progress-row{margin-left:0}.topic-progress-row input{height:28px}
-.modal-backdrop{place-items:end stretch;padding:0}
-.modal{width:100%;max-width:none;border-radius:22px 22px 0 0;padding:10px 18px calc(18px + env(safe-area-inset-bottom));max-height:88vh;animation:sheetUp .22s ease-out}
-.modal::before{content:"";display:block;width:40px;height:5px;border-radius:5px;background:#d9dde6;margin:0 auto 14px}
-.field input,.field textarea,.field select{font-size:16px}.modal-actions .btn{flex:1;padding:13px}
-.toast{bottom:calc(92px + env(safe-area-inset-bottom))}
-.footer{line-height:1.7}}
+.app{padding:0 16px calc(100px + env(safe-area-inset-bottom))}
+.bar{margin:0 -16px;padding:env(safe-area-inset-top) 8px 0 16px;background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.layout{display:block;padding-top:4px}.side{position:static}
+body.view-home .detail{display:none}
+body.view-subject .side,body.view-subject .brand,body.view-subject .banner{display:none!important}body.view-subject .back{display:flex}
+#addSubjectBtn,#addTopicBtn{display:none}
+.subject.active{border-color:var(--line);box-shadow:none}
+.detail-head h2{font-size:26px}
+.fab{display:flex;align-items:center;gap:6px;position:fixed;right:calc(20px + env(safe-area-inset-right));bottom:calc(20px + env(safe-area-inset-bottom));height:54px;padding:0 22px 0 18px;border-radius:27px;background:var(--accent);color:var(--on-accent);font-size:16px;font-weight:600;z-index:5;box-shadow:0 6px 20px rgba(0,0,0,.18);transition:transform .12s}.fab:active{transform:scale(.95)}.fab b{font-size:24px;font-weight:400;line-height:1}
+.backdrop{place-items:end stretch;padding:0}
+.sheet{width:100%;border-radius:20px 20px 0 0;padding:8px 20px calc(20px + env(safe-area-inset-bottom));max-height:88vh;animation:up .22s ease-out}
+.sheet::before{content:"";display:block;width:36px;height:4px;border-radius:4px;background:var(--line);margin:0 auto 14px}
+.field input:not([type=radio]),.field textarea,.search{font-size:16px}
+.toast{bottom:calc(92px + env(safe-area-inset-bottom))}}
 </style>
 </head>
 <body>
 <div class="app">
-  <header class="topbar">
-    <button class="back-btn" id="backBtn" aria-label="Back to subjects"><b>‹</b> Subjects</button>
-    <div class="brand"><div class="logo">✓</div><div><h1>SubjectFlow</h1><p>Your personal subject & topic tracker</p></div></div>
-    <div class="actions"><button class="btn btn-light" id="menuBtn" aria-label="More options">⋯</button><button class="btn btn-primary desktop-only" id="addSubjectBtn">＋ Subject</button></div>
+  <header class="bar">
+    <button class="back" id="backBtn" aria-label="Back to subjects"><b>‹</b> Subjects</button>
+    <h1 class="brand">SubjectFlow</h1>
+    <button class="icon" id="menuBtn" aria-label="Menu">⋯</button>
   </header>
-  <div class="install-banner hidden" id="installBanner"><div class="logo">✓</div><div class="install-text"><strong>Install SubjectFlow</strong><span id="installHint">Add it to your home screen for quick, offline access.</span></div><button class="btn btn-primary" id="installBtn">Install</button><button class="icon-btn" id="installDismiss" aria-label="Dismiss">×</button></div>
-  <section class="stats">
-    <div class="stat"><div class="stat-top">Subjects <span class="stat-icon">▤</span></div><strong id="statSubjects">0</strong><small>Subjects in your plan</small></div>
-    <div class="stat"><div class="stat-top">Total topics <span class="stat-icon">☷</span></div><strong id="statTopics">0</strong><small>Across all subjects</small></div>
-    <div class="stat"><div class="stat-top">Completed <span class="stat-icon">✓</span></div><strong id="statCompleted">0</strong><small>Topics finished</small></div>
-    <div class="stat"><div class="stat-top">Overall progress <span class="stat-icon">◔</span></div><strong id="statProgress">0%</strong><small>Based on topic progress</small></div>
-  </section>
+  <div class="banner" id="banner" hidden><span id="bannerText"></span><button class="link" id="bannerAction"></button><button class="icon" id="bannerClose" aria-label="Dismiss">×</button></div>
   <main class="layout">
-    <aside class="panel side-panel">
-      <div class="panel-head"><div><h2>Your subjects</h2><div class="subtle" id="subjectCountLabel">0 subjects</div></div><button class="btn btn-light" id="sideAddBtn" aria-label="Add subject">＋</button></div>
-      <div class="subject-list" id="subjectList"></div>
-      <div class="empty-side" id="emptySubjects">No subjects yet.<br>Create one to get started.</div>
+    <aside class="side">
+      <div class="hello"><h2 id="helloTitle">Hello</h2><p id="helloText"></p></div>
+      <section class="summary" id="summary">
+        <div><strong id="sumProgress">0%</strong><span>Overall progress</span></div>
+        <button id="goalBtn" aria-label="Change daily goal"><strong id="sumToday">0/3</strong><span>Today's goal</span></button>
+        <div><strong id="sumStreak">0</strong><span>Day streak</span></div>
+      </section>
+      <input class="search" id="search" type="search" placeholder="🔍  Search topics in all subjects" aria-label="Search topics in all subjects">
+      <div class="list-head" id="subjectsHead"><h2>Your subjects</h2><button class="add" id="addSubjectBtn">+ Add subject</button></div>
+      <ul class="list" id="subjectList"></ul>
+      <ul class="list" id="results" hidden></ul>
+      <div class="start" id="emptySubjects"><h3>Let's get you started</h3><p>Three quick steps:</p><ol><li>Add a subject, like Mathematics</li><li>Break it into topics you need to study</li><li>Tick topics off as you finish them</li></ol><button class="btn btn-primary" id="startAddBtn">+ Add your first subject</button></div>
     </aside>
-    <section class="panel content-panel">
-      <div id="subjectView" class="hidden">
-        <div class="content-head">
-          <div class="content-title-row"><div style="min-width:0"><h2 class="content-title" id="selectedSubjectName"></h2><p class="content-desc" id="selectedSubjectDesc"></p></div><button class="icon-btn" id="editSubjectBtn" title="Edit subject">✎</button></div>
-          <div class="subject-progress"><div class="progress-label"><span>Subject progress</span><strong id="subjectProgressText">0%</strong></div><div class="bar"><span id="subjectProgressBar" style="width:0%"></span></div></div>
-        </div>
-        <div class="topic-toolbar"><div><strong style="font-size:13px">Topics</strong> <span class="subtle" id="topicCountLabel">· 0 topics</span></div><div class="actions"><input class="search" id="searchTopics" placeholder="Search topics…" aria-label="Search topics"><button class="btn btn-primary" id="addTopicBtn">＋ Topic</button></div></div>
-        <div class="topic-list" id="topicList"></div>
-        <div class="empty-main hidden" id="emptyTopics"><div class="empty-illustration">☷</div><h3>No topics added</h3><p>Add your first topic and track your learning progress here.</p><button class="btn btn-primary" id="emptyAddTopicBtn">＋ Add first topic</button></div>
+    <section class="detail">
+      <div id="subjectView" hidden>
+        <div class="detail-head"><div><h2 id="subjectName"></h2><p id="subjectMeta"></p><p id="subjectDesc"></p></div><button class="btn btn-soft" id="editSubjectBtn">Edit</button></div>
+        <div class="track"><span id="subjectBar"></span></div>
+        <div class="list-head"><h2>Topics <span id="topicCount"></span></h2><button class="add" id="addTopicBtn">+ Add topic</button></div>
+        <ul class="list" id="topicList"></ul>
+        <div class="start" id="emptyTopics"><h3>No topics yet</h3><p>Break this subject into smaller topics, like chapters or lessons. You'll track each one separately.</p><button class="btn btn-primary" id="startTopicBtn">+ Add first topic</button></div>
+        <p class="hint hint-touch" id="hintTouch">Tap a topic to edit · Swipe right when done · Swipe left to delete</p>
+        <p class="hint hint-mouse" id="hintMouse">Click a topic to edit · Tap the bars to set progress · Drag ⠿ to reorder</p>
       </div>
-      <div class="empty-main" id="welcomeView"><div class="empty-illustration">✦</div><h3>Plan your learning</h3><p>Create a subject, break it into topics, and track your progress one step at a time.</p><button class="btn btn-primary" id="welcomeAddBtn">＋ Create a subject</button></div>
+      <div class="welcome" id="welcomeView"><h3>Pick a subject</h3><p>Choose a subject on the left to see its topics.</p></div>
     </section>
   </main>
-  <div class="footer">Saved automatically on this device · SubjectFlow</div>
 </div>
-<div class="modal-backdrop hidden" id="modalBackdrop">
-  <form class="modal" id="editForm">
-    <h3 id="modalTitle">Add subject</h3><div id="modalFields"></div>
-    <div class="modal-actions"><button type="button" class="btn btn-light" id="cancelModal">Cancel</button><button type="submit" class="btn btn-primary" id="saveModal">Save</button></div>
+<div class="backdrop" id="modalBackdrop" hidden>
+  <form class="sheet" id="editForm">
+    <h3 id="modalTitle"></h3><div id="modalFields"></div>
+    <div class="sheet-actions"><button type="button" class="btn btn-danger" id="deleteModal">Delete</button><div class="right"><button type="button" class="btn btn-ghost" id="cancelModal">Cancel</button><button type="submit" class="btn btn-primary">Save</button></div></div>
   </form>
 </div>
-<div class="modal-backdrop hidden" id="menuBackdrop">
-  <div class="modal sheet">
+<div class="backdrop" id="menuBackdrop" hidden>
+  <div class="sheet">
     <h3>SubjectFlow</h3>
-    <button class="sheet-item hidden" id="installMenuItem"><b>⤓</b> Install app</button>
-    <button class="sheet-item" id="exportBtn"><b>↧</b> Export backup</button>
-    <button class="sheet-item" id="importBtn"><b>↥</b> Import backup</button>
-    <button class="btn btn-light sheet-cancel" id="closeMenu">Close</button>
+    <button class="menu-item" id="installItem" hidden><span>Install app<em>Open it from your home screen, works offline</em></span></button>
+    <button class="menu-item" id="exportItem"><span>Back up my data<em>Last backup: <b id="backupLabel"></b></em></span></button>
+    <button class="menu-item" id="importItem"><span>Restore from backup<em>Load a backup file you saved earlier</em></span></button>
+    <button class="menu-item" id="goalItem"><span>Daily goal<em>How many topics to finish each day</em></span><small id="goalLabel"></small></button>
   </div>
 </div>
-<button class="fab" id="fab" aria-label="Add">＋</button>
+<button class="fab" id="fab"><b>+</b><span id="fabLabel">Add subject</span></button>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<input type="file" id="importFile" accept="application/json,.json" class="hidden">
+<input type="file" id="importFile" accept="application/json,.json" hidden>
 <script>
 (() => {
-  const KEY = 'subjectflow.v1';
-  const $ = id => document.getElementById(id);
-  let data = loadData(), selectedId = data.subjects[0]?.id || null, modalState = null, view = 'home', toastTimer = null;
-  const mobile = matchMedia('(max-width:760px)');
-  function setView(v){ view=v; document.body.classList.toggle('view-home',v==='home'); document.body.classList.toggle('view-subject',v==='subject'); }
-  // On phones the subject list and topic list are separate screens; history entries make the system back button work.
-  function openSubject(id){ selectedId=id; if(mobile.matches && view!=='subject'){ history.pushState({view:'subject'},''); setView('subject'); window.scrollTo(0,0); } render(); }
-  function goHome(){ if(history.state?.view==='subject') history.back(); else { setView('home'); render(); } }
-  function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2200); }
-  function uid(){ return 'id-' + Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
-  function loadData(){ try { const d=JSON.parse(localStorage.getItem(KEY)); if(d && Array.isArray(d.subjects)) return d; } catch(e){} return {subjects:[]}; }
-  function save(){ localStorage.setItem(KEY, JSON.stringify(data)); render(); }
-  function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-  function current(){return data.subjects.find(s=>s.id===selectedId)||null;}
-  function pct(s){if(!s.topics.length)return 0;return Math.round(s.topics.reduce((a,t)=>a+(Number(t.progress)||0),0)/s.topics.length);}
-  function status(t){return t.progress>=100?'Completed':t.progress>0?'In Progress':'Not Started';}
-  function statusClass(t){return t.progress>=100?'status-done':t.progress>0?'status-progress':'status-not';}
-  function render(){
-    const topics=data.subjects.flatMap(s=>s.topics), completed=topics.filter(t=>t.progress>=100).length;
-    $('statSubjects').textContent=data.subjects.length;$('statTopics').textContent=topics.length;$('statCompleted').textContent=completed;
-    $('statProgress').textContent=topics.length?Math.round(topics.reduce((a,t)=>a+(+t.progress||0),0)/topics.length)+'%':'0%';
-    $('subjectCountLabel').textContent=data.subjects.length+' subject'+(data.subjects.length===1?'':'s');
-    $('emptySubjects').classList.toggle('hidden',data.subjects.length>0);
-    $('subjectList').innerHTML=data.subjects.map(s=>`<div class="subject-item ${s.id===selectedId?'active':''}" data-select="${s.id}"><span class="subject-dot" style="background:${esc(s.color||'#4f46e5')}"></span><div class="subject-meta"><div class="subject-name">${esc(s.name)}</div><div class="subject-count">${s.topics.length} topic${s.topics.length===1?'':'s'}</div><div class="mini-progress"><span style="width:${pct(s)}%;background:${esc(s.color||'#4f46e5')}"></span></div></div><span class="subject-percent">${pct(s)}%</span></div>`).join('');
-    const s=current();if(!s&&view==='subject')setView('home');
-    $('fab').setAttribute('aria-label',view==='subject'?'Add topic':'Add subject');$('subjectView').classList.toggle('hidden',!s);$('welcomeView').classList.toggle('hidden',!!s);
-    if(!s)return;
-    $('selectedSubjectName').textContent=s.name;$('selectedSubjectDesc').textContent=s.description||'Keep learning, one topic at a time.';
-    $('subjectProgressText').textContent=pct(s)+'%';$('subjectProgressBar').style.width=pct(s)+'%';$('subjectProgressBar').style.background=s.color||'var(--primary)';
-    $('topicCountLabel').textContent='· '+s.topics.length+' topic'+(s.topics.length===1?'':'s');
-    const q=$('searchTopics').value.trim().toLowerCase(), filtered=s.topics.filter(t=>(t.name+' '+(t.note||'')).toLowerCase().includes(q));
-    $('topicList').innerHTML=filtered.map(t=>`<article class="topic"><div class="topic-main"><input class="check" type="checkbox" data-complete="${t.id}" ${t.progress>=100?'checked':''} aria-label="Mark ${esc(t.name)} completed"><div class="topic-body"><div class="topic-name">${esc(t.name)}</div>${t.note?`<div class="topic-note">${esc(t.note)}</div>`:''}</div><div class="topic-right"><span class="status ${statusClass(t)}">${status(t)}</span><button class="icon-btn" data-edit-topic="${t.id}" title="Edit topic" aria-label="Edit topic">✎</button><button class="icon-btn" data-delete-topic="${t.id}" title="Delete topic" aria-label="Delete topic">×</button></div></div><div class="topic-progress-row"><input type="range" min="0" max="100" step="5" value="${Math.max(0,Math.min(100,+t.progress||0))}" data-progress="${t.id}" aria-label="Progress for ${esc(t.name)}"><span>${Math.max(0,Math.min(100,+t.progress||0))}%</span></div></article>`).join('');
-    $('emptyTopics').classList.toggle('hidden',s.topics.length>0);
-    if(s.topics.length>0 && filtered.length===0)$('topicList').innerHTML='<div class="empty-side">No topics match your search.</div>';
-  }
-  function openModal(kind, item=null){
-    modalState={kind,id:item?.id||null};$('modalTitle').textContent=kind==='subject'?(item?'Edit subject':'Create subject'):(item?'Edit topic':'Add topic');
-    if(kind==='subject')$('modalFields').innerHTML=`<label class="field"><span>Subject name *</span><input name="name" required maxlength="100" placeholder="e.g. Mathematics" value="${esc(item?.name||'')}"></label><label class="field"><span>Description (optional)</span><textarea name="description" maxlength="300" placeholder="What do you want to learn?">${esc(item?.description||'')}</textarea></label><label class="field"><span>Subject color</span><input type="color" name="color" value="${esc(item?.color||'#4f46e5')}" style="height:42px;padding:5px"></label>${item?'<button type="button" class="btn btn-danger" id="deleteSubjectModal">Delete subject</button>':''}`;
-    else $('modalFields').innerHTML=`<label class="field"><span>Topic name *</span><input name="name" required maxlength="140" placeholder="e.g. Linear equations" value="${esc(item?.name||'')}"></label><label class="field"><span>Notes (optional)</span><textarea name="note" maxlength="500" placeholder="Add a short note or resource…">${esc(item?.note||'')}</textarea></label><label class="field"><span>Progress</span><select name="progress"><option value="0" ${(+item?.progress||0)===0?'selected':''}>Not Started — 0%</option><option value="25" ${+item?.progress===25?'selected':''}>25%</option><option value="50" ${+item?.progress===50?'selected':''}>50%</option><option value="75" ${+item?.progress===75?'selected':''}>75%</option><option value="100" ${+item?.progress===100?'selected':''}>Completed — 100%</option></select></label>${item?'<button type="button" class="btn btn-danger" id="deleteTopicModal">Delete topic</button>':''}`;
-    $('modalBackdrop').classList.remove('hidden');
-    const delS=$('deleteSubjectModal'),delT=$('deleteTopicModal');if(delS)delS.onclick=()=>deleteSubject(item.id);if(delT)delT.onclick=()=>deleteTopic(item.id);
-    $('modalFields').querySelector('input[name="name"]').focus();
-  }
-  function closeModal(){$('modalBackdrop').classList.add('hidden');modalState=null;}
-  function deleteSubject(id){const s=data.subjects.find(x=>x.id===id);if(!s)return;if(!confirm(`Delete "${s.name}" and all its topics? This cannot be undone.`))return;data.subjects=data.subjects.filter(x=>x.id!==id);if(selectedId===id)selectedId=data.subjects[0]?.id||null;closeModal();if(view==='subject')goHome();save();toast('Subject deleted');}
-  function deleteTopic(id){const s=current();if(!s)return;const t=s.topics.find(x=>x.id===id);if(!t||!confirm(`Delete topic "${t.name}"?`))return;s.topics=s.topics.filter(x=>x.id!==id);closeModal();save();}
-  $('editForm').addEventListener('submit',e=>{e.preventDefault();const fd=new FormData(e.currentTarget),name=String(fd.get('name')||'').trim();if(!name)return;let newSubjectId=null;
-    if(modalState.kind==='subject'){if(modalState.id){const s=data.subjects.find(x=>x.id===modalState.id);Object.assign(s,{name,description:String(fd.get('description')||'').trim(),color:String(fd.get('color')||'#4f46e5')});}else{const s={id:uid(),name,description:String(fd.get('description')||'').trim(),color:String(fd.get('color')||'#4f46e5'),topics:[]};data.subjects.push(s);selectedId=newSubjectId=s.id;}}
-    else {const s=current();if(!s)return;const values={name,note:String(fd.get('note')||'').trim(),progress:Number(fd.get('progress')||0)};if(modalState.id)Object.assign(s.topics.find(t=>t.id===modalState.id),values);else s.topics.push({id:uid(),...values});}
-    closeModal();save();if(newSubjectId)openSubject(newSubjectId);
-  });
-  $('cancelModal').onclick=closeModal;$('modalBackdrop').addEventListener('click',e=>{if(e.target===$('modalBackdrop'))closeModal();});
-  $('addSubjectBtn').onclick=$('sideAddBtn').onclick=$('welcomeAddBtn').onclick=()=>openModal('subject');
-  $('addTopicBtn').onclick=$('emptyAddTopicBtn').onclick=()=>openModal('topic');
-  $('editSubjectBtn').onclick=()=>{const s=current();if(s)openModal('subject',s);};
-  $('searchTopics').addEventListener('input',render);
-  $('subjectList').addEventListener('click',e=>{const item=e.target.closest('[data-select]');if(item)openSubject(item.dataset.select);});
-  $('backBtn').onclick=goHome;
-  $('fab').onclick=()=>openModal(view==='subject'&&current()?'topic':'subject');
-  window.addEventListener('popstate',e=>{setView(e.state?.view==='subject'&&current()?'subject':'home');render();});
-  mobile.addEventListener('change',()=>{if(!mobile.matches&&view==='subject')goHome();});
-  document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!$('modalBackdrop').classList.contains('hidden'))closeModal();closeMenu();});
-  $('topicList').addEventListener('click',e=>{const s=current();if(!s)return;const ed=e.target.closest('[data-edit-topic]'),del=e.target.closest('[data-delete-topic]');if(ed){const t=s.topics.find(x=>x.id===ed.dataset.editTopic);if(t)openModal('topic',t);}if(del)deleteTopic(del.dataset.deleteTopic);});
-  $('topicList').addEventListener('change',e=>{const s=current();if(!s)return;const cb=e.target.closest('[data-complete]');if(cb){const t=s.topics.find(x=>x.id===cb.dataset.complete);if(t)t.progress=cb.checked?100:0;save();}else if(e.target.closest('[data-progress]'))render();});
-  $('topicList').addEventListener('input',e=>{const s=current();if(!s)return;const r=e.target.closest('[data-progress]');if(r){const t=s.topics.find(x=>x.id===r.dataset.progress);if(t){t.progress=Number(r.value);const label=r.parentElement.querySelector('span');if(label)label.textContent=r.value+'%';const topic=r.closest('.topic');const badge=topic.querySelector('.status');badge.textContent=status(t);badge.className='status '+statusClass(t);localStorage.setItem(KEY,JSON.stringify(data));$('subjectProgressText').textContent=pct(s)+'%';$('subjectProgressBar').style.width=pct(s)+'%';$('statProgress').textContent=(data.subjects.flatMap(x=>x.topics).length?Math.round(data.subjects.flatMap(x=>x.topics).reduce((a,x)=>a+(+x.progress||0),0)/data.subjects.flatMap(x=>x.topics).length)+'%':'0%');}}});
-  function closeMenu(){$('menuBackdrop').classList.add('hidden');}
-  $('menuBtn').onclick=()=>$('menuBackdrop').classList.remove('hidden');
-  $('closeMenu').onclick=closeMenu;$('menuBackdrop').addEventListener('click',e=>{if(e.target===$('menuBackdrop'))closeMenu();});
-  $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='subjectflow-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);closeMenu();toast('Backup exported');};
-  $('importBtn').onclick=()=>{closeMenu();$('importFile').click();};
-  $('importFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(d&&Array.isArray(d.subjects)&&confirm('Replace your current data with this backup?')){data={subjects:d.subjects};selectedId=data.subjects[0]?.id||null;if(view==='subject')goHome();save();toast('Backup imported');}}catch(err){alert('This backup file is not valid.');}e.target.value='';};
-
-  // Install prompt: Chrome/Edge/Android fire beforeinstallprompt; iOS Safari needs manual "Add to Home Screen".
-  const INSTALL_DISMISSED='subjectflow.installDismissed';
+  const KEY='subjectflow.v1', BACKUP_KEY='subjectflow.lastBackup', FIRST_KEY='subjectflow.firstSeen', SNOOZE_KEY='subjectflow.backupSnooze', INSTALL_DISMISSED='subjectflow.installDismissed';
+  const DAY=864e5, COLORS=['#4f46e5','#0ea5e9','#10b981','#f59e0b','#ef4444','#ec4899','#64748b'];
+  const $=id=>document.getElementById(id);
+  const mobile=matchMedia('(max-width:760px)'), touch=matchMedia('(pointer:coarse)');
   const isStandalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
   const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-  let installPrompt=null;
-  function updateInstallUI(){const can=!isStandalone&&(!!installPrompt||isIOS);$('installMenuItem').classList.toggle('hidden',!can);$('installBanner').classList.toggle('hidden',!can||localStorage.getItem(INSTALL_DISMISSED)==='1');if(isIOS&&!installPrompt)$('installHint').textContent='Tap Share, then “Add to Home Screen”.';}
-  async function install(){closeMenu();if(installPrompt){installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;updateInstallUI();}else if(isIOS)alert('To install: tap the Share button in Safari, then choose "Add to Home Screen".');}
-  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;updateInstallUI();});
-  window.addEventListener('appinstalled',()=>{installPrompt=null;$('installBanner').classList.add('hidden');$('installMenuItem').classList.add('hidden');toast('SubjectFlow installed');});
-  $('installBtn').onclick=$('installMenuItem').onclick=install;
-  $('installDismiss').onclick=()=>{localStorage.setItem(INSTALL_DISMISSED,'1');$('installBanner').classList.add('hidden');};
-  updateInstallUI();
+  let data=loadData(), selectedId=data.subjects[0]?.id||null, modalState=null, view='home', toastTimer=null, suppressClick=false, persistAsked=false, installPrompt=null, banner=null;
+  if(!localStorage.getItem(FIRST_KEY))localStorage.setItem(FIRST_KEY,Date.now());
+
+  function uid(){ return 'id-'+Date.now().toString(36)+Math.random().toString(36).slice(2,8); }
+  function normalize(d){ return {subjects:d.subjects.map(s=>({...s,topics:Array.isArray(s.topics)?s.topics:[]})),log:d.log&&typeof d.log==='object'?d.log:{},goal:Math.max(1,+d.goal||3)}; }
+  function loadData(){ try{ const d=JSON.parse(localStorage.getItem(KEY)); if(d&&Array.isArray(d.subjects))return normalize(d); }catch(e){} return normalize({subjects:[]}); }
+  function save(){ localStorage.setItem(KEY,JSON.stringify(data)); persist(); render(); }
+  // Ask the browser not to evict our data under storage pressure (Safari otherwise clears it after weeks of inactivity).
+  function persist(){ if(persistAsked||!navigator.storage?.persist)return; persistAsked=true; navigator.storage.persisted().then(p=>p||navigator.storage.persist()).catch(()=>{}); }
+  function esc(s=''){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  const buzz=ms=>navigator.vibrate?.(ms);
+  const dayKey=(d=new Date())=>d.toLocaleDateString('en-CA');
+  function ago(ms){ const d=Math.floor((Date.now()-ms)/DAY); return d<=0?'today':d===1?'yesterday':`${d} days ago`; }
+  function current(){ return data.subjects.find(s=>s.id===selectedId)||null; }
+  function prog(t){ return Math.max(0,Math.min(100,+t.progress||0)); }
+  function pct(s){ return s.topics.length?Math.round(s.topics.reduce((a,t)=>a+prog(t),0)/s.topics.length):0; }
+  function setProgress(t,p){ const was=prog(t)>=100, now=p>=100; t.progress=p; if(was!==now){ const k=dayKey(); data.log[k]=Math.max(0,(data.log[k]||0)+(now?1:-1)); if(now){ buzz(12); toast(data.log[k]===data.goal?"🎉 Today's goal reached!":'Nice, topic done!'); } } }
+  function streak(){ let n=0; const d=new Date(); if(!data.log[dayKey(d)])d.setDate(d.getDate()-1); while(data.log[dayKey(d)]>0){ n++; d.setDate(d.getDate()-1); } return n; }
+  function examLabel(s){ if(!s.examDate)return ''; const days=Math.round((new Date(s.examDate+'T00:00')-new Date(dayKey()+'T00:00'))/DAY); if(days<0)return ''; return `<span class="${days<=7?'soon':''}">${days===0?'Exam today':days===1?'Exam tomorrow':`Exam in ${days} days`}</span>`; }
+  function color(s){ return esc(s.color||COLORS[0]); }
+
+  function setView(v){ view=v; document.body.classList.toggle('view-home',v==='home'); document.body.classList.toggle('view-subject',v==='subject'); }
+  // On phones the subject list and topic list are separate screens; history entries make the system back button work.
+  function openSubject(id){ selectedId=id; if(mobile.matches&&view!=='subject'){ history.pushState({view:'subject'},''); setView('subject'); window.scrollTo(0,0); } render(); }
+  function goHome(){ if(history.state?.view==='subject')history.back(); else { setView('home'); render(); } }
+  function toast(msg,undo){ const el=$('toast'); el.innerHTML=`<span>${esc(msg)}</span>${undo?'<button>Undo</button>':''}`; if(undo)el.querySelector('button').onclick=()=>{ undo(); el.classList.remove('show'); }; el.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('show'),undo?5000:2200); }
+
+  function render(){
+    const topics=data.subjects.flatMap(s=>s.topics), q=$('search').value.trim().toLowerCase();
+    $('sumProgress').textContent=(topics.length?Math.round(topics.reduce((a,t)=>a+prog(t),0)/topics.length):0)+'%';
+    $('sumToday').textContent=`${data.log[dayKey()]||0}/${data.goal}`;
+    const today=data.log[dayKey()]||0, st=streak(), h=new Date().getHours(), left=data.goal-today;
+    $('sumStreak').textContent=st?`🔥 ${st}`:'0';
+    $('helloTitle').textContent=h<12?'Good morning':h<18?'Good afternoon':'Good evening';
+    $('helloText').textContent=!data.subjects.length?'Ready to plan your studies?':!topics.length?'Add some topics to start tracking.':left>0?`${left} more topic${left===1?'':'s'} to reach today's goal.`:"You've reached today's goal. Great work!";
+    $('summary').hidden=!data.subjects.length;
+    $('subjectsHead').hidden=$('subjectList').hidden=!!q; $('results').hidden=!q;
+    $('emptySubjects').hidden=data.subjects.length>0||!!q;
+    $('subjectList').innerHTML=data.subjects.map(s=>{ const done=s.topics.filter(t=>prog(t)>=100).length, ex=examLabel(s);
+      return `<li class="subject ${s.id===selectedId?'active':''}" data-id="${s.id}" data-select="${s.id}"><span class="dot" style="background:${color(s)}"></span><div class="meta"><div class="name">${esc(s.name)}</div><div class="sub">${s.topics.length?`${done} of ${s.topics.length} done`:'No topics yet'}${ex?' · '+ex:''}</div><div class="mini"><span style="width:${pct(s)}%;background:${color(s)}"></span></div></div><span class="pct">${pct(s)}%</span><span class="grip" data-grip aria-hidden="true"></span></li>`; }).join('');
+    if(q){ const hits=data.subjects.flatMap(s=>s.topics.filter(t=>(t.name+' '+(t.note||'')).toLowerCase().includes(q)).map(t=>({s,t})));
+      $('results').innerHTML=hits.length?hits.map(({s,t})=>`<li class="subject" data-select="${s.id}"><span class="dot" style="background:${color(s)}"></span><div class="meta"><div class="name">${esc(t.name)}</div><div class="sub">${esc(s.name)} · ${prog(t)}%</div></div></li>`).join(''):'<li class="empty">No matching topics.</li>'; }
+    const s=current(); if(!s&&view==='subject')setView('home');
+    $('fabLabel').textContent=view==='subject'?'Add topic':'Add subject';
+    $('fab').hidden=!data.subjects.length&&view==='home';
+    $('subjectView').hidden=!s; $('welcomeView').hidden=!!s||!data.subjects.length;
+    updateBanner();
+    if(!s)return;
+    $('subjectName').textContent=s.name;
+    $('subjectMeta').innerHTML=[`${pct(s)}% complete`,examLabel(s)].filter(Boolean).join(' · ');
+    $('subjectDesc').textContent=s.description||''; $('subjectDesc').hidden=!s.description;
+    $('subjectBar').style.width=pct(s)+'%'; $('subjectBar').style.background=s.color||COLORS[0];
+    $('topicCount').textContent=s.topics.length?`(${s.topics.length})`:'';
+    $('topicList').style.setProperty('--c',s.color||COLORS[0]);
+    $('topicList').innerHTML=s.topics.map(t=>{ const p=prog(t);
+      return `<li class="topic ${p>=100?'is-done':''}" data-id="${t.id}"><div class="row"><button class="check ${p>=100?'done':''}" data-complete aria-label="${p>=100?'Mark not done':'Mark done'}">✓</button><div class="topic-body" data-edit><div class="topic-name">${esc(t.name)}</div>${t.note?`<div class="topic-note">${esc(t.note)}</div>`:''}<div class="segs">${[25,50,75,100].map(v=>`<button data-seg="${v}" class="${p>=v?'on':''}" aria-label="Set ${v}%"></button>`).join('')}<span>${p>=100?'Done':p>0?`${p}% · In progress`:'Not started'}</span></div></div><span class="grip" data-grip aria-hidden="true"></span></div></li>`; }).join('');
+    $('emptyTopics').hidden=s.topics.length>0; $('hintTouch').hidden=$('hintMouse').hidden=!s.topics.length;
+  }
+
+  function openModal(kind,item=null){
+    modalState={kind,id:item?.id||null};
+    $('modalTitle').textContent={subject:item?'Edit subject':'Add a subject',topic:item?'Edit topic':'Add a topic',goal:'Daily goal'}[kind];
+    if(kind==='subject'){ const c=item?.color||COLORS[0], colors=COLORS.includes(c)?COLORS:[...COLORS,c];
+      $('modalFields').innerHTML=`<label class="field"><span>Name</span><input name="name" required maxlength="100" placeholder="e.g. Mathematics" value="${esc(item?.name||'')}"></label><label class="field"><span>Description</span><textarea name="description" maxlength="300" placeholder="Optional, e.g. Algebra and calculus">${esc(item?.description||'')}</textarea></label><label class="field"><span>Exam date</span><input type="date" name="examDate" value="${esc(item?.examDate||'')}"><small>Optional. We'll show how many days are left.</small></label><div class="field"><span>Color</span><div class="swatches">${colors.map(x=>`<input type="radio" name="color" value="${esc(x)}" style="--sw:${esc(x)}" aria-label="Color ${esc(x)}" ${x===c?'checked':''}>`).join('')}</div></div>`; }
+    else if(kind==='topic') $('modalFields').innerHTML=`<label class="field"><span>Name</span><input name="name" required maxlength="140" placeholder="e.g. Linear equations" value="${esc(item?.name||'')}"></label><label class="field"><span>Notes</span><textarea name="note" maxlength="500" placeholder="Optional, e.g. book chapter, video link">${esc(item?.note||'')}</textarea></label>`;
+    else $('modalFields').innerHTML=`<label class="field"><span>Topics to finish each day</span><input type="number" name="goal" min="1" max="50" required inputmode="numeric" value="${data.goal}"><small>Start small. You can change it any time.</small></label>`;
+    $('deleteModal').hidden=!item||kind==='goal';
+    closeMenu(); $('modalBackdrop').hidden=false;
+    if(!item||kind==='goal')$('modalFields').querySelector('input').focus();
+  }
+  function closeModal(){ $('modalBackdrop').hidden=true; modalState=null; }
+  function deleteTopic(id){ const s=current(); if(!s)return; const i=s.topics.findIndex(x=>x.id===id); if(i<0)return; const [t]=s.topics.splice(i,1); closeModal(); buzz(20); save(); toast('Topic deleted',()=>{ s.topics.splice(i,0,t); save(); }); }
+  function deleteSubject(id){ const i=data.subjects.findIndex(x=>x.id===id); if(i<0)return; const [s]=data.subjects.splice(i,1); if(selectedId===id)selectedId=data.subjects[0]?.id||null; closeModal(); if(view==='subject')goHome(); buzz(20); save(); toast('Subject deleted',()=>{ data.subjects.splice(i,0,s); selectedId=s.id; save(); }); }
+  $('deleteModal').onclick=()=>modalState.kind==='subject'?deleteSubject(modalState.id):deleteTopic(modalState.id);
+  $('editForm').addEventListener('submit',e=>{ e.preventDefault(); const fd=new FormData(e.currentTarget), str=k=>String(fd.get(k)||'').trim(), {kind,id}=modalState;
+    if(kind==='goal'){ data.goal=Math.max(1,Math.min(50,+fd.get('goal')||3)); closeModal(); save(); return; }
+    const name=str('name'); if(!name)return; let newId=null;
+    if(kind==='subject'){ const values={name,description:str('description'),examDate:str('examDate'),color:str('color')||COLORS[0]}; if(id)Object.assign(data.subjects.find(x=>x.id===id),values); else { const s={id:uid(),...values,topics:[]}; data.subjects.push(s); selectedId=newId=s.id; } }
+    else { const s=current(); if(!s)return; const values={name,note:str('note')}; if(id)Object.assign(s.topics.find(t=>t.id===id),values); else s.topics.push({id:uid(),...values,progress:0}); }
+    closeModal(); save(); if(newId)openSubject(newId);
+  });
+  $('cancelModal').onclick=closeModal;
+  $('modalBackdrop').addEventListener('click',e=>{ if(e.target===$('modalBackdrop'))closeModal(); });
+  $('addSubjectBtn').onclick=$('startAddBtn').onclick=()=>openModal('subject');
+  $('addTopicBtn').onclick=$('startTopicBtn').onclick=()=>openModal('topic');
+  $('goalBtn').onclick=$('goalItem').onclick=()=>openModal('goal');
+  $('editSubjectBtn').onclick=()=>{ const s=current(); if(s)openModal('subject',s); };
+  $('fab').onclick=()=>openModal(view==='subject'&&current()?'topic':'subject');
+  $('backBtn').onclick=goHome;
+  $('search').addEventListener('input',render);
+  const selectFrom=e=>{ if(e.target.closest('[data-grip]'))return; const item=e.target.closest('[data-select]'); if(item)openSubject(item.dataset.select); };
+  $('subjectList').addEventListener('click',selectFrom); $('results').addEventListener('click',selectFrom);
+  $('topicList').addEventListener('click',e=>{
+    if(suppressClick)return; const s=current(), li=e.target.closest('.topic'); if(!s||!li)return; const t=s.topics.find(x=>x.id===li.dataset.id); if(!t)return;
+    const seg=e.target.closest('[data-seg]');
+    if(seg){ const v=+seg.dataset.seg; setProgress(t,prog(t)===v?v-25:v); save(); return; }
+    if(e.target.closest('[data-complete]')){ setProgress(t,prog(t)>=100?0:100); save(); return; }
+    if(e.target.closest('[data-edit]'))openModal('topic',t);
+  });
+
+  // Swipe a topic right to toggle done, left to delete (touch only; mouse users use the check and edit sheet).
+  let sw=null;
+  $('topicList').addEventListener('pointerdown',e=>{ if(e.pointerType==='mouse'||e.target.closest('[data-grip]'))return; const li=e.target.closest('.topic'); if(li)sw={li,x:e.clientX,y:e.clientY,dx:0,active:false}; });
+  $('topicList').addEventListener('pointermove',e=>{ if(!sw)return; const dx=e.clientX-sw.x, dy=e.clientY-sw.y;
+    if(!sw.active){ if(Math.abs(dy)>10){ sw=null; return; } if(Math.abs(dx)<10)return; sw.active=true; sw.li.classList.add('swiping'); }
+    sw.dx=dx; sw.li.querySelector('.row').style.transform=`translateX(${dx}px)`; sw.li.dataset.dir=dx>0?'right':'left'; sw.li.toggleAttribute('data-armed',Math.abs(dx)>80); });
+  const endSwipe=()=>{ if(!sw)return; const {li,dx,active}=sw; sw=null; if(!active)return;
+    li.classList.remove('swiping'); li.querySelector('.row').style.transform=''; delete li.dataset.dir; li.removeAttribute('data-armed');
+    suppressClick=true; setTimeout(()=>suppressClick=false);
+    const t=current()?.topics.find(x=>x.id===li.dataset.id); if(!t)return;
+    if(dx>80){ setProgress(t,prog(t)>=100?0:100); save(); } else if(dx<-80)deleteTopic(t.id); };
+  $('topicList').addEventListener('pointerup',endSwipe); $('topicList').addEventListener('pointercancel',endSwipe);
+
+  // Drag the grip to reorder subjects or topics.
+  function enableReorder(list,getItems){
+    list.addEventListener('pointerdown',e=>{ const grip=e.target.closest('[data-grip]'); if(!grip)return; e.preventDefault();
+      const item=grip.closest('[data-id]'); item.classList.add('dragging'); grip.setPointerCapture(e.pointerId); buzz(8);
+      const move=ev=>{ const after=[...list.querySelectorAll(':scope>[data-id]:not(.dragging)')].find(n=>{ const r=n.getBoundingClientRect(); return ev.clientY<r.top+r.height/2; }); list.insertBefore(item,after||null); };
+      const up=()=>{ grip.removeEventListener('pointermove',move); grip.removeEventListener('pointerup',up); grip.removeEventListener('pointercancel',up); item.classList.remove('dragging');
+        const order=[...list.querySelectorAll(':scope>[data-id]')].map(n=>n.dataset.id), items=getItems(); if(items)items.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id)); save(); };
+      grip.addEventListener('pointermove',move); grip.addEventListener('pointerup',up); grip.addEventListener('pointercancel',up);
+    });
+  }
+  enableReorder($('subjectList'),()=>data.subjects);
+  enableReorder($('topicList'),()=>current()?.topics);
+
+  function closeMenu(){ $('menuBackdrop').hidden=true; }
+  $('menuBtn').onclick=()=>{ const last=+localStorage.getItem(BACKUP_KEY); $('backupLabel').textContent=last?ago(last):'never'; $('goalLabel').textContent=`${data.goal} a day`; $('installItem').hidden=!canInstall(); $('menuBackdrop').hidden=false; };
+  $('menuBackdrop').addEventListener('click',e=>{ if(e.target===$('menuBackdrop'))closeMenu(); });
+
+  // Backups: share sheet on phones (save to Drive, send to chat), plain download elsewhere.
+  async function exportBackup(){
+    closeMenu();
+    const name=`subjectflow-${dayKey()}.json`, file=new File([JSON.stringify(data,null,2)],name,{type:'application/json'});
+    if(touch.matches&&navigator.canShare?.({files:[file]})){ try{ await navigator.share({files:[file],title:'SubjectFlow backup'}); return backedUp(); }catch(err){ if(err.name==='AbortError')return; } }
+    const url=URL.createObjectURL(file), a=document.createElement('a'); a.href=url; a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(url),1000); backedUp();
+  }
+  function backedUp(){ localStorage.setItem(BACKUP_KEY,Date.now()); toast('Backup saved'); render(); }
+  $('exportItem').onclick=exportBackup;
+  $('importItem').onclick=()=>{ closeMenu(); $('importFile').click(); };
+  $('importFile').onchange=async e=>{ const f=e.target.files[0]; e.target.value=''; if(!f)return;
+    try{ const d=JSON.parse(await f.text()); if(!d||!Array.isArray(d.subjects))throw 0; const prev=data; data=normalize(d); selectedId=data.subjects[0]?.id||null; if(view==='subject')goHome(); save(); toast('Backup restored',()=>{ data=prev; selectedId=data.subjects[0]?.id||null; save(); }); }
+    catch(err){ toast("That file isn't a SubjectFlow backup"); } };
+
+  // Install prompt: Chrome/Edge/Android fire beforeinstallprompt; iOS Safari needs manual "Add to Home Screen".
+  function canInstall(){ return !isStandalone&&(!!installPrompt||isIOS); }
+  async function install(){ closeMenu(); if(installPrompt){ installPrompt.prompt(); await installPrompt.userChoice; installPrompt=null; render(); } else if(isIOS)alert('Tap the Share button in Safari, then choose "Add to Home Screen".'); }
+  window.addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); installPrompt=e; render(); });
+  window.addEventListener('appinstalled',()=>{ installPrompt=null; render(); toast('SubjectFlow installed'); });
+  $('installItem').onclick=install;
+
+  // One banner at a time: backup reminder after 7 days without a backup, otherwise the install hint.
+  function updateBanner(){
+    const now=Date.now(), last=+localStorage.getItem(BACKUP_KEY)||0, base=last||+localStorage.getItem(FIRST_KEY)||now;
+    banner=null;
+    if(data.subjects.some(s=>s.topics.length)&&now-base>7*DAY&&now>(+localStorage.getItem(SNOOZE_KEY)||0))
+      banner={text:last?`Last backup ${ago(last)}`:'Your data lives only on this device',action:'Back up',run:exportBackup,close:()=>localStorage.setItem(SNOOZE_KEY,now+3*DAY)};
+    else if(canInstall()&&localStorage.getItem(INSTALL_DISMISSED)!=='1')
+      banner={text:installPrompt?'Install SubjectFlow for offline use':'Install: tap Share → Add to Home Screen',action:installPrompt?'Install':'',run:install,close:()=>localStorage.setItem(INSTALL_DISMISSED,'1')};
+    $('banner').hidden=!banner; if(!banner)return;
+    $('bannerText').textContent=banner.text; $('bannerAction').textContent=banner.action; $('bannerAction').hidden=!banner.action;
+  }
+  $('bannerAction').onclick=()=>banner?.run();
+  $('bannerClose').onclick=()=>{ banner?.close(); updateBanner(); };
+
+  window.addEventListener('popstate',e=>{ closeModal(); closeMenu(); setView(e.state?.view==='subject'&&current()?'subject':'home'); render(); });
+  mobile.addEventListener('change',()=>{ if(!mobile.matches&&view==='subject')goHome(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeModal(); closeMenu(); } });
 
   setView(history.state?.view==='subject'&&mobile.matches&&current()?'subject':'home');
   render();
+  if(data.subjects.length)persist();
 
   // Register the service worker when served from localhost or HTTPS.
-  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js').catch(err => console.warn('PWA service worker registration failed:', err));
-    });
+  if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1')){
+    window.addEventListener('load',()=>{ navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('PWA service worker registration failed:',err)); });
   }
 })();
 </script>
