@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#4f46e5">
+<meta name="description" content="Track subjects, topics, status, and study progress offline.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>SubjectFlow — Study Tracker</title>
+<style>
+:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#738096;--line:#e6eaf1;--primary:#4f46e5;--primary2:#4338ca;--green:#16845b;--amber:#b7791f;--red:#c24141;--shadow:0 8px 28px rgba(24,39,75,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.app{max-width:1180px;margin:auto;padding:26px 20px 50px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:14px;background:var(--primary);color:#fff;display:grid;place-items:center;font-size:23px;box-shadow:0 7px 16px #4f46e533}.brand h1{font-size:20px;letter-spacing:-.5px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}.actions{display:flex;gap:9px;flex-wrap:wrap}.btn{padding:10px 14px;border-radius:10px;font-weight:650;font-size:13px;display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:.15s}.btn-primary{background:var(--primary);color:white}.btn-primary:hover{background:var(--primary2)}.btn-light{background:#fff;border:1px solid var(--line);color:var(--text)}.btn-danger{background:#fff1f1;color:var(--red)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px;font-weight:650}.stat-icon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:#eeedff;color:var(--primary);font-size:16px}.stat strong{display:block;font-size:27px;letter-spacing:-1px;margin:8px 0 2px}.stat small{color:var(--muted);font-size:12px}.layout{display:grid;grid-template-columns:310px minmax(0,1fr);gap:18px;align-items:start}.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:18px 18px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}.panel-head h2{font-size:15px;margin:0}.subtle{font-size:12px;color:var(--muted)}.subject-list{padding:0 10px 12px}.subject-item{display:flex;align-items:center;gap:10px;padding:12px;border-radius:12px;cursor:pointer;margin:3px 0;border:1px solid transparent}.subject-item:hover{background:#f8f9ff}.subject-item.active{background:#f0efff;border-color:#e0ddff}.subject-dot{width:10px;height:10px;border-radius:50%;background:var(--primary);flex-shrink:0}.subject-meta{min-width:0;flex:1}.subject-name{font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.subject-count{font-size:11px;color:var(--muted);margin-top:2px}.mini-progress{height:5px;background:#e9edf5;border-radius:8px;overflow:hidden;margin-top:7px}.mini-progress span,.bar span{display:block;height:100%;background:var(--primary);border-radius:8px}.subject-percent{font-size:11px;color:var(--muted)}.empty-side{padding:22px 16px;text-align:center;color:var(--muted);font-size:13px}.content-head{padding:20px 22px;border-bottom:1px solid var(--line)}.content-title-row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.content-title{font-size:22px;font-weight:780;letter-spacing:-.7px;margin:0;overflow-wrap:anywhere}.content-desc{color:var(--muted);font-size:13px;margin:5px 0 0}.subject-progress{margin-top:17px}.progress-label{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted);margin-bottom:7px}.progress-label strong{color:var(--text)}.bar{height:8px;background:#edf0f6;border-radius:10px;overflow:hidden}.topic-toolbar{padding:15px 20px;display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid var(--line)}.search{width:100%;max-width:245px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;outline:none;background:#fbfcfe;font-size:13px}.search:focus,input:focus,textarea:focus,select:focus{border-color:#a5a0ff;box-shadow:0 0 0 3px #4f46e515;outline:none}.topic-list{padding:8px 14px 16px}.topic{padding:15px 8px;border-bottom:1px solid #eef0f5}.topic:last-child{border-bottom:0}.topic-main{display:flex;align-items:flex-start;gap:12px}.check{width:20px;height:20px;margin-top:2px;accent-color:var(--primary);flex-shrink:0}.topic-body{min-width:0;flex:1}.topic-name{font-weight:700;font-size:14px;overflow-wrap:anywhere}.topic-note{font-size:12px;color:var(--muted);margin-top:3px;overflow-wrap:anywhere}.topic-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}.status{border-radius:20px;padding:4px 8px;font-size:10px;font-weight:750;white-space:nowrap}.status-not{background:#f0f2f6;color:#657187}.status-progress{background:#fff3d9;color:#9a6500}.status-done{background:#e3f7ee;color:#13734d}.icon-btn{background:transparent;color:#7b8799;padding:5px 7px;border-radius:7px;font-size:15px}.icon-btn:hover{background:#f0f2f8;color:var(--text)}.topic-progress-row{margin:12px 0 0 32px;display:flex;align-items:center;gap:10px}.topic-progress-row input{flex:1;accent-color:var(--primary);height:4px}.topic-progress-row span{font-size:11px;color:var(--muted);width:34px;text-align:right}.empty-main{padding:55px 20px;text-align:center}.empty-illustration{width:56px;height:56px;border-radius:18px;background:#efefff;color:var(--primary);display:grid;place-items:center;margin:0 auto 13px;font-size:25px}.empty-main h3{margin:0 0 5px;font-size:16px}.empty-main p{margin:0 auto 17px;color:var(--muted);font-size:13px;max-width:300px}.hidden{display:none!important}.footer{color:#929bad;text-align:center;font-size:11px;margin-top:22px}.modal-backdrop{position:fixed;inset:0;background:#11182775;display:grid;place-items:center;padding:18px;z-index:5}.modal{background:white;width:min(100%,440px);border-radius:18px;padding:22px;box-shadow:0 25px 70px #0003;max-height:90vh;overflow:auto}.modal h3{margin:0 0 18px;font-size:18px}.field{display:block;margin:13px 0}.field span{display:block;font-size:12px;font-weight:700;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:13px}.field textarea{resize:vertical;min-height:75px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}.notice{font-size:11px;color:var(--muted);margin-top:12px}.mobile-subjects{display:none}
+@media(max-width:760px){.app{padding:17px 12px 35px}.topbar{align-items:flex-start;margin-bottom:20px}.brand h1{font-size:18px}.brand p{max-width:190px}.actions .btn{padding:9px 10px;font-size:12px}.stats{grid-template-columns:repeat(2,1fr);gap:10px}.stat{padding:14px}.stat strong{font-size:23px}.layout{grid-template-columns:1fr}.side-panel{display:none}.mobile-subjects{display:block;margin-bottom:14px}.mobile-subjects select{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff}.content-head{padding:17px}.content-title{font-size:20px}.topic-toolbar{padding:12px 14px}.search{max-width:150px}.topic-list{padding:5px 12px 12px}.topic-right{gap:4px}.topic-progress-row{margin-left:0}.topic-main{gap:9px}.footer{line-height:1.7}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="logo">✓</div><div><h1>SubjectFlow</h1><p>Your personal subject & topic tracker</p></div></div>
+    <div class="actions"><button class="btn btn-light" id="exportBtn">↧ Export</button><button class="btn btn-primary" id="addSubjectBtn">＋ Subject</button></div>
+  </header>
+  <section class="stats">
+    <div class="stat"><div class="stat-top">Subjects <span class="stat-icon">▤</span></div><strong id="statSubjects">0</strong><small>Subjects in your plan</small></div>
+    <div class="stat"><div class="stat-top">Total topics <span class="stat-icon">☷</span></div><strong id="statTopics">0</strong><small>Across all subjects</small></div>
+    <div class="stat"><div class="stat-top">Completed <span class="stat-icon">✓</span></div><strong id="statCompleted">0</strong><small>Topics finished</small></div>
+    <div class="stat"><div class="stat-top">Overall progress <span class="stat-icon">◔</span></div><strong id="statProgress">0%</strong><small>Based on topic progress</small></div>
+  </section>
+  <div class="mobile-subjects"><select id="mobileSubjectSelect" aria-label="Choose subject"><option value="">Choose a subject…</option></select></div>
+  <main class="layout">
+    <aside class="panel side-panel">
+      <div class="panel-head"><div><h2>Your subjects</h2><div class="subtle" id="subjectCountLabel">0 subjects</div></div><button class="btn btn-light" id="sideAddBtn" aria-label="Add subject">＋</button></div>
+      <div class="subject-list" id="subjectList"></div>
+      <div class="empty-side" id="emptySubjects">No subjects yet.<br>Create one to get started.</div>
+    </aside>
+    <section class="panel">
+      <div id="subjectView" class="hidden">
+        <div class="content-head">
+          <div class="content-title-row"><div style="min-width:0"><h2 class="content-title" id="selectedSubjectName"></h2><p class="content-desc" id="selectedSubjectDesc"></p></div><button class="icon-btn" id="editSubjectBtn" title="Edit subject">✎</button></div>
+          <div class="subject-progress"><div class="progress-label"><span>Subject progress</span><strong id="subjectProgressText">0%</strong></div><div class="bar"><span id="subjectProgressBar" style="width:0%"></span></div></div>
+        </div>
+        <div class="topic-toolbar"><div><strong style="font-size:13px">Topics</strong> <span class="subtle" id="topicCountLabel">· 0 topics</span></div><div class="actions"><input class="search" id="searchTopics" placeholder="Search topics…" aria-label="Search topics"><button class="btn btn-primary" id="addTopicBtn">＋ Topic</button></div></div>
+        <div class="topic-list" id="topicList"></div>
+        <div class="empty-main hidden" id="emptyTopics"><div class="empty-illustration">☷</div><h3>No topics added</h3><p>Add your first topic and track your learning progress here.</p><button class="btn btn-primary" id="emptyAddTopicBtn">＋ Add first topic</button></div>
+      </div>
+      <div class="empty-main" id="welcomeView"><div class="empty-illustration">✦</div><h3>Plan your learning</h3><p>Create a subject, break it into topics, and track your progress one step at a time.</p><button class="btn btn-primary" id="welcomeAddBtn">＋ Create a subject</button></div>
+    </section>
+  </main>
+  <div class="footer">Saved automatically on this device · SubjectFlow</div>
+</div>
+<div class="modal-backdrop hidden" id="modalBackdrop">
+  <form class="modal" id="editForm">
+    <h3 id="modalTitle">Add subject</h3><div id="modalFields"></div>
+    <div class="modal-actions"><button type="button" class="btn btn-light" id="cancelModal">Cancel</button><button type="submit" class="btn btn-primary" id="saveModal">Save</button></div>
+  </form>
+</div>
+<input type="file" id="importFile" accept="application/json,.json" class="hidden">
+<script>
+(() => {
+  const KEY = 'subjectflow.v1';
+  const $ = id => document.getElementById(id);
+  let data = loadData(), selectedId = data.subjects[0]?.id || null, modalState = null;
+  function uid(){ return 'id-' + Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
+  function loadData(){ try { const d=JSON.parse(localStorage.getItem(KEY)); if(d && Array.isArray(d.subjects)) return d; } catch(e){} return {subjects:[]}; }
+  function save(){ localStorage.setItem(KEY, JSON.stringify(data)); render(); }
+  function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+  function current(){return data.subjects.find(s=>s.id===selectedId)||null;}
+  function pct(s){if(!s.topics.length)return 0;return Math.round(s.topics.reduce((a,t)=>a+(Number(t.progress)||0),0)/s.topics.length);}
+  function status(t){return t.progress>=100?'Completed':t.progress>0?'In Progress':'Not Started';}
+  function statusClass(t){return t.progress>=100?'status-done':t.progress>0?'status-progress':'status-not';}
+  function render(){
+    const topics=data.subjects.flatMap(s=>s.topics), completed=topics.filter(t=>t.progress>=100).length;
+    $('statSubjects').textContent=data.subjects.length;$('statTopics').textContent=topics.length;$('statCompleted').textContent=completed;
+    $('statProgress').textContent=topics.length?Math.round(topics.reduce((a,t)=>a+(+t.progress||0),0)/topics.length)+'%':'0%';
+    $('subjectCountLabel').textContent=data.subjects.length+' subject'+(data.subjects.length===1?'':'s');
+    $('emptySubjects').classList.toggle('hidden',data.subjects.length>0);
+    $('subjectList').innerHTML=data.subjects.map(s=>`<div class="subject-item ${s.id===selectedId?'active':''}" data-select="${s.id}"><span class="subject-dot" style="background:${esc(s.color||'#4f46e5')}"></span><div class="subject-meta"><div class="subject-name">${esc(s.name)}</div><div class="subject-count">${s.topics.length} topic${s.topics.length===1?'':'s'}</div><div class="mini-progress"><span style="width:${pct(s)}%;background:${esc(s.color||'#4f46e5')}"></span></div></div><span class="subject-percent">${pct(s)}%</span></div>`).join('');
+    $('mobileSubjectSelect').innerHTML='<option value="">Choose a subject…</option>'+data.subjects.map(s=>`<option value="${s.id}" ${s.id===selectedId?'selected':''}>${esc(s.name)}</option>`).join('');
+    const s=current();$('subjectView').classList.toggle('hidden',!s);$('welcomeView').classList.toggle('hidden',!!s);
+    if(!s)return;
+    $('selectedSubjectName').textContent=s.name;$('selectedSubjectDesc').textContent=s.description||'Keep learning, one topic at a time.';
+    $('subjectProgressText').textContent=pct(s)+'%';$('subjectProgressBar').style.width=pct(s)+'%';$('subjectProgressBar').style.background=s.color||'var(--primary)';
+    $('topicCountLabel').textContent='· '+s.topics.length+' topic'+(s.topics.length===1?'':'s');
+    const q=$('searchTopics').value.trim().toLowerCase(), filtered=s.topics.filter(t=>(t.name+' '+(t.note||'')).toLowerCase().includes(q));
+    $('topicList').innerHTML=filtered.map(t=>`<article class="topic"><div class="topic-main"><input class="check" type="checkbox" data-complete="${t.id}" ${t.progress>=100?'checked':''} aria-label="Mark ${esc(t.name)} completed"><div class="topic-body"><div class="topic-name">${esc(t.name)}</div>${t.note?`<div class="topic-note">${esc(t.note)}</div>`:''}</div><div class="topic-right"><span class="status ${statusClass(t)}">${status(t)}</span><button class="icon-btn" data-edit-topic="${t.id}" title="Edit topic" aria-label="Edit topic">✎</button><button class="icon-btn" data-delete-topic="${t.id}" title="Delete topic" aria-label="Delete topic">×</button></div></div><div class="topic-progress-row"><input type="range" min="0" max="100" step="5" value="${Math.max(0,Math.min(100,+t.progress||0))}" data-progress="${t.id}" aria-label="Progress for ${esc(t.name)}"><span>${Math.max(0,Math.min(100,+t.progress||0))}%</span></div></article>`).join('');
+    $('emptyTopics').classList.toggle('hidden',s.topics.length>0);
+    if(s.topics.length>0 && filtered.length===0)$('topicList').innerHTML='<div class="empty-side">No topics match your search.</div>';
+  }
+  function openModal(kind, item=null){
+    modalState={kind,id:item?.id||null};$('modalTitle').textContent=kind==='subject'?(item?'Edit subject':'Create subject'):(item?'Edit topic':'Add topic');
+    if(kind==='subject')$('modalFields').innerHTML=`<label class="field"><span>Subject name *</span><input name="name" required maxlength="100" placeholder="e.g. Mathematics" value="${esc(item?.name||'')}"></label><label class="field"><span>Description (optional)</span><textarea name="description" maxlength="300" placeholder="What do you want to learn?">${esc(item?.description||'')}</textarea></label><label class="field"><span>Subject color</span><input type="color" name="color" value="${esc(item?.color||'#4f46e5')}" style="height:42px;padding:5px"></label>${item?'<button type="button" class="btn btn-danger" id="deleteSubjectModal">Delete subject</button>':''}`;
+    else $('modalFields').innerHTML=`<label class="field"><span>Topic name *</span><input name="name" required maxlength="140" placeholder="e.g. Linear equations" value="${esc(item?.name||'')}"></label><label class="field"><span>Notes (optional)</span><textarea name="note" maxlength="500" placeholder="Add a short note or resource…">${esc(item?.note||'')}</textarea></label><label class="field"><span>Progress</span><select name="progress"><option value="0" ${(+item?.progress||0)===0?'selected':''}>Not Started — 0%</option><option value="25" ${+item?.progress===25?'selected':''}>25%</option><option value="50" ${+item?.progress===50?'selected':''}>50%</option><option value="75" ${+item?.progress===75?'selected':''}>75%</option><option value="100" ${+item?.progress===100?'selected':''}>Completed — 100%</option></select></label>${item?'<button type="button" class="btn btn-danger" id="deleteTopicModal">Delete topic</button>':''}`;
+    $('modalBackdrop').classList.remove('hidden');
+    const delS=$('deleteSubjectModal'),delT=$('deleteTopicModal');if(delS)delS.onclick=()=>deleteSubject(item.id);if(delT)delT.onclick=()=>deleteTopic(item.id);
+    $('modalFields').querySelector('input[name="name"]').focus();
+  }
+  function closeModal(){$('modalBackdrop').classList.add('hidden');modalState=null;}
+  function deleteSubject(id){const s=data.subjects.find(x=>x.id===id);if(!s)return;if(!confirm(`Delete "${s.name}" and all its topics? This cannot be undone.`))return;data.subjects=data.subjects.filter(x=>x.id!==id);if(selectedId===id)selectedId=data.subjects[0]?.id||null;closeModal();save();}
+  function deleteTopic(id){const s=current();if(!s)return;const t=s.topics.find(x=>x.id===id);if(!t||!confirm(`Delete topic "${t.name}"?`))return;s.topics=s.topics.filter(x=>x.id!==id);closeModal();save();}
+  $('editForm').addEventListener('submit',e=>{e.preventDefault();const fd=new FormData(e.currentTarget),name=String(fd.get('name')||'').trim();if(!name)return;
+    if(modalState.kind==='subject'){if(modalState.id){const s=data.subjects.find(x=>x.id===modalState.id);Object.assign(s,{name,description:String(fd.get('description')||'').trim(),color:String(fd.get('color')||'#4f46e5')});}else{const s={id:uid(),name,description:String(fd.get('description')||'').trim(),color:String(fd.get('color')||'#4f46e5'),topics:[]};data.subjects.push(s);selectedId=s.id;}}
+    else {const s=current();if(!s)return;const values={name,note:String(fd.get('note')||'').trim(),progress:Number(fd.get('progress')||0)};if(modalState.id)Object.assign(s.topics.find(t=>t.id===modalState.id),values);else s.topics.push({id:uid(),...values});}
+    closeModal();save();
+  });
+  $('cancelModal').onclick=closeModal;$('modalBackdrop').addEventListener('click',e=>{if(e.target===$('modalBackdrop'))closeModal();});
+  $('addSubjectBtn').onclick=$('sideAddBtn').onclick=$('welcomeAddBtn').onclick=()=>openModal('subject');
+  $('addTopicBtn').onclick=$('emptyAddTopicBtn').onclick=()=>openModal('topic');
+  $('editSubjectBtn').onclick=()=>{const s=current();if(s)openModal('subject',s);};
+  $('searchTopics').addEventListener('input',render);
+  $('mobileSubjectSelect').onchange=e=>{selectedId=e.target.value||null;render();};
+  $('subjectList').addEventListener('click',e=>{const item=e.target.closest('[data-select]');if(item){selectedId=item.dataset.select;render();}});
+  $('topicList').addEventListener('click',e=>{const s=current();if(!s)return;const ed=e.target.closest('[data-edit-topic]'),del=e.target.closest('[data-delete-topic]');if(ed){const t=s.topics.find(x=>x.id===ed.dataset.editTopic);if(t)openModal('topic',t);}if(del)deleteTopic(del.dataset.deleteTopic);});
+  $('topicList').addEventListener('change',e=>{const s=current();if(!s)return;const cb=e.target.closest('[data-complete]');if(cb){const t=s.topics.find(x=>x.id===cb.dataset.complete);if(t)t.progress=cb.checked?100:0;save();}else if(e.target.closest('[data-progress]'))render();});
+  $('topicList').addEventListener('input',e=>{const s=current();if(!s)return;const r=e.target.closest('[data-progress]');if(r){const t=s.topics.find(x=>x.id===r.dataset.progress);if(t){t.progress=Number(r.value);const label=r.parentElement.querySelector('span');if(label)label.textContent=r.value+'%';const topic=r.closest('.topic');const badge=topic.querySelector('.status');badge.textContent=status(t);badge.className='status '+statusClass(t);localStorage.setItem(KEY,JSON.stringify(data));$('subjectProgressText').textContent=pct(s)+'%';$('subjectProgressBar').style.width=pct(s)+'%';$('statProgress').textContent=(data.subjects.flatMap(x=>x.topics).length?Math.round(data.subjects.flatMap(x=>x.topics).reduce((a,x)=>a+(+x.progress||0),0)/data.subjects.flatMap(x=>x.topics).length)+'%':'0%');}}});
+  $('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='subjectflow-backup.json';a.click();URL.revokeObjectURL(url);};
+  // Import via the browser file picker, accessible from the export button's context alternative.
+  $('exportBtn').addEventListener('contextmenu',e=>{e.preventDefault();$('importFile').click();});
+  $('importFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!d||!Array.isArray(d.subjects)||!confirm('Replace your current data with this backup?'))return;data={subjects:d.subjects};selectedId=data.subjects[0]?.id||null;save();}catch(err){alert('This backup file is not valid.');}e.target.value='';};
+  render();
+
+  // Register the service worker when served from localhost or HTTPS.
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(err => console.warn('PWA service worker registration failed:', err));
+    });
+  }
+})();
+</script>
+</body>
+</html>
